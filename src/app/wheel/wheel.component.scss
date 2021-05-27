@@ -1,0 +1,284 @@
+@import '~scss-mixin-leobonhart/mixins.scss';
+@function getVW($size, $maxVW: 1920) {
+	$const: 1vw;
+	$rez: ($size * 100) / $maxVW;
+	@return #{$rez}vw;
+}
+
+$wheelTopNotchWidth: 2vw;
+$wh: 38vw;
+$fill_height: 4vw;
+$auterBorder: 1px;
+$innerBorder: 1px;
+$wheelColor: #AAA;
+$carcassColor: #468;
+$carcassWidth: 5vw;
+
+%common_style{
+  display: flex;
+  width: 100%;
+  height:100%;
+  border-radius:50%;
+  overflow: hidden;
+  position: relative;
+}
+.wheel {
+  display: flex;
+  position: relative;
+  width: $wh;
+  height: $wh;
+  .auterBorder {
+    border: $auterBorder solid black;
+    @extend %common_style;
+    .fill {
+      border: $fill_height solid $wheelColor;
+      @extend %common_style;
+      .innerBorder {
+        border: $innerBorder solid black;
+        @extend %common_style;
+        margin: -$innerBorder;
+        width: calc(100% + #{$innerBorder * 2});
+        height: calc(100% + #{$innerBorder * 2});
+        .carcassHorizontal {
+          $carcassHorizontalWidth: $wh * 2;
+          display: flex;
+          width: $carcassHorizontalWidth;
+          height: $carcassHorizontalWidth;
+          border: $carcassWidth solid $carcassColor;
+          border-radius: 50%;
+          position:absolute;
+          left: calc(50% - #{($carcassHorizontalWidth / 2)});
+          top: 15vw;
+        }
+        .carcassVertical {
+          $carcassVerticalWidth: $carcassWidth * 2;
+          display: flex;
+          background-color: $carcassColor;
+          width: $carcassVerticalWidth;
+          height:20vw;
+          position:absolute;
+          left: calc(50% - #{($carcassVerticalWidth / 2)});
+          top: $wh / 2;
+        }
+      }
+    }
+  }
+  .wheelTopNotch {
+    $top: ($wh - $wheelTopNotchWidth) / 2;
+    width: $wheelTopNotchWidth;
+    height: calc( #{$fill_height} + #{$innerBorder});
+    background-color:#468;
+    position: absolute;
+    left: $top;
+    top: -$auterBorder;
+  }
+  .image-wheel{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    img{
+    }
+    .wheel-btns{
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      &::after{
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+      }
+      &::before{
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+      }
+      &.active{
+        display: flex;
+      }
+    }
+
+    &[data-type="g29"]{
+      .wheel-btns{
+        &::after{
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url(/assets/images/g29.png);
+          background-repeat: no-repeat;
+          background-size: 100%;
+        }
+        &::before{
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url(/assets/images/g29.png);
+          background-repeat: no-repeat;
+          clip-path: polygon(0 0);
+          background-size: 100%;
+        }
+        &.d-pad-up{
+          &::after{
+            $top: 35.8%;
+            $left: 29.8%;
+            $width: 2.3%;
+            $height: 3%;
+            clip-path: polygon($left $top, $left + $width $top, $left + $width $top + $height, $left $top + $height);
+            filter: sepia() saturate(1000%) hue-rotate(110deg) brightness(3);
+          }
+        }
+        &.d-pad-left{
+          &::after{
+            $top: 38.5%;
+            $left: 26.65%;
+            $width: 3%;
+            $height: 2.3%;
+            clip-path: polygon($left $top, $left + $width $top, $left + $width $top + $height, $left $top + $height);
+            filter: sepia() saturate(1000%) hue-rotate(110deg) brightness(3);
+          }
+        }
+        &.d-pad-right{
+          &::after{
+            $top: 38.8%;
+            $left: 32%;
+            $width: 3%;
+            $height: 2.3%;
+            clip-path: polygon($left $top, $left + $width $top, $left + $width $top + $height, $left $top + $height);
+            filter: sepia() saturate(1000%) hue-rotate(110deg) brightness(1.7);
+          }
+        }
+        &.d-pad-down{
+          &::after{
+            $top: 40.8%;
+            $left: 29.8%;
+            $width: 2.3%;
+            $height: 3%;
+            clip-path: polygon($left $top, $left + $width $top, $left + $width $top + $height, $left $top + $height);
+            filter: sepia() saturate(1000%) hue-rotate(110deg) brightness(1.7);
+          }
+        }
+        &.b-11{
+          &::after{
+            clip-path: polygon(24% 56%, 28% 56.3%, 29% 56.5%, 29% 59%, 28% 59%, 26% 60%, 24% 59%);
+            filter: hue-rotate(270deg) brightness(1.5);
+          }
+        }
+        &.b-7{
+          &::after{
+            clip-path: polygon(34.3% 53%, 34.3% 49.2%, 34% 48.1%, 31.3% 49.5%, 31.3% 52%, 32% 53%);
+            filter: hue-rotate(270deg) brightness(1.5);
+          }
+        }
+        &.b-6{
+          &::after{
+            clip-path: polygon(65.5% 52%, 65.5% 49%, 66% 48.2%, 68.2% 49%, 69% 52%, 68% 53%, 66% 53%);
+            filter: hue-rotate(270deg) brightness(1.5);
+          }
+        }
+        &.b-10{
+          &::after{
+            clip-path: polygon(71% 58%, 71% 56.5%, 76% 56%, 76% 58%, 74% 59%, 73% 60%);
+            filter: hue-rotate(270deg) brightness(1.5);
+          }
+        }
+        &.b-0{
+          &::after{
+            clip-path: circle(1.7% at 69.3% 43.3%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+        }
+        &.b-1{
+          &::after{
+            clip-path: circle(1.7% at 65.4% 39.9%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+        }
+        &.b-3{
+          &::after{
+            clip-path: circle(1.7% at 69.3% 36.3%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+        }
+        &.b-2{
+          &::after{
+            clip-path: circle(1.7% at 72.8% 39.7%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+        }
+        &.b-4{
+          &::after{
+            clip-path: polygon(73% 31%, 75% 36%, 76% 37%, 78% 44%, 80% 44%, 80% 44%, 81% 44%, 83% 45%, 84% 44%, 85% 44%, 82% 37%, 79% 32%, 76% 29%, 74% 29%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+          &::before{
+            clip-path: polygon(75% 59%, 76% 59%, 76% 58%, 79% 58%, 79% 59%, 85% 61%, 84% 67%, 75% 64%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+        }
+        &.b-5{
+          &::after{
+            clip-path: polygon(14% 44%, 15% 34%, 25% 26%, 32% 30%, 24% 37%, 22% 44%, 18% 45%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+          &::before{
+            clip-path: polygon(24% 58%, 26% 68%, 17% 69%, 15% 62%, 19% 60%, 21% 58%);
+            filter: sepia() saturate(1000%) hue-rotate(70deg) brightness(1.4);
+          }
+        }
+        &.b-19{
+          &::after{
+            clip-path: polygon(32% 64%, 41% 64%, 40% 61%, 38% 60%, 36% 59.5%, 35% 60%, 33% 61%, 32% 62%);
+            filter: sepia() saturate(1000%) hue-rotate(110deg) brightness(2);
+          }
+        }
+        &.b-20{
+          &::after{
+            clip-path: polygon(32% 64%, 41% 64%, 40% 66%, 39% 68%, 38% 68%, 36% 68%, 34% 68%, 33% 67%, 32% 66%);
+            filter: sepia() saturate(1000%) hue-rotate(110deg) brightness(1.3);
+          }
+        }
+        &.b-8{
+          &::after{
+            clip-path: inset(65.2% 48.5% 32.5% 48.5%);
+            filter: sepia() saturate(1000%) hue-rotate(90deg) brightness(2);
+          }
+        }
+        &.b-9{
+          &::after{
+            clip-path: inset(68.2% 48.5% 30% 48.5%);
+            filter: sepia() saturate(1000%) hue-rotate(90deg) brightness(2);
+          }
+        }
+        &.b-24{
+          &::after{
+            clip-path: inset(71.3% 48.5% 25.5% 48.5%);
+            filter: sepia() saturate(1000%) hue-rotate(90deg) brightness(2);
+          }
+        }
+        &.b-23{
+          &::after{
+            clip-path: circle(4.0% at 63.5% 63%);
+            filter: sepia() saturate(1000%) hue-rotate(90deg) brightness(2);
+          }
+        }
+        &.b-21{
+          &::after{
+            clip-path: polygon(60% 65%, 59.2% 63%, 59% 63%, 59.5% 62%, 60% 61%, 60.5% 60%, 61% 60%, 62% 59%, 63% 59%, 64% 59%, 65% 59%, 65% 59%, 66% 60%, 66% 60%, 67% 61%, 67.3% 62%, 67.5% 63%, 67.6% 64%, 67% 65%, 67% 65%, 66% 66%, 66% 66%, 65% 67%, 64% 67%, 63% 67%, 62% 67%, 61% 66%, 61% 66%, 60% 65%, 58% 65%, 57% 66%, 57% 73%, 71% 73%, 73% 68%, 72% 62%, 69% 59%, 67% 58%, 64% 57%, 63% 57%, 62% 57%, 61% 57%, 60% 58%, 59% 59%, 58% 60%, 57.5% 61%, 57% 62%, 57% 63%, 57% 64%, 57% 65%, 57% 67%);
+            filter: sepia() saturate(1000%) hue-rotate(90deg) brightness(2);
+          }
+        }
+        &.b-22{
+          &::after{
+            clip-path: polygon(60% 65%, 59.2% 63%, 59% 63%, 59.5% 62%, 60% 61%, 60.5% 60%, 61% 60%, 62% 59%, 63% 59%, 64% 59%, 65% 59%, 65% 59%, 66% 60%, 66% 60%, 67% 61%, 67.3% 62%, 67.5% 63%, 67.6% 64%, 67% 65%, 67% 65%, 66% 66%, 66% 66%, 65% 67%, 64% 67%, 63% 67%, 62% 67%, 61% 66%, 61% 66%, 60% 65%, 58% 65%, 57% 66%, 57% 73%, 71% 73%, 73% 68%, 72% 62%, 69% 59%, 67% 58%, 64% 57%, 63% 57%, 62% 57%, 61% 57%, 60% 58%, 59% 59%, 58% 60%, 57.5% 61%, 57% 62%, 57% 63%, 57% 64%, 57% 65%, 57% 67%);
+            filter: sepia() saturate(1000%) hue-rotate(90deg) brightness(2);
+          }
+        }
+      }
+    }
+  }
+}

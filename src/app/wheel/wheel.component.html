@@ -1,0 +1,19 @@
+<div class="wheel" [style.transform]="wheel" [ngSwitch]="type">
+  <ng-template ngSwitchCase="g29">
+    <app-g29></app-g29>
+  </ng-template>
+  <ng-template ngSwitchCase="g27">
+    <app-g27></app-g27>
+  </ng-template>
+  <ng-template ngSwitchDefault>
+    <span class="auterBorder">
+      <span class="fill">
+          <span class="innerBorder">
+              <span class="carcassHorizontal"></span>
+              <span class="carcassVertical"></span>
+          </span>
+      </span>
+      <span class="wheelTopNotch"></span>
+    </span>
+  </ng-template>
+</div>

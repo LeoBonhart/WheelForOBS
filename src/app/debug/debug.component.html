@@ -1,0 +1,47 @@
+<div>
+  <span>Руль</span>
+  <span>{{type}}</span>
+</div>
+<div>
+  <span>Поворот руля</span>
+  <span>{{wheel}}</span>
+</div>
+<div>
+  <span>Сцепление</span>
+  <span>{{pedals.clutch}}</span>
+</div>
+<div>
+  <span>Томоз</span>
+  <span>{{pedals.brake}}</span>
+</div>
+<div>
+  <span>Газ</span>
+  <span>{{pedals.throttle}}</span>
+</div>
+<ng-container [ngSwitch]="type">
+  <ng-template ngSwitchCase="g29">
+    <ng-template ngFor let-button [ngForOf]="buttons">
+      <ng-container *ngTemplateOutlet="buttonTemplate; context: {$implicit: button}"></ng-container>
+    </ng-template>
+    <div class="D-Pad">
+      <div class="up" [ngClass]="{pushed: dPad?.up}"><div>▲</div></div>
+      <div class="left" [ngClass]="{pushed: dPad?.left}"><div>▲</div></div>
+      <div class="right" [ngClass]="{pushed: dPad?.right}"><div>▲</div></div>
+      <div class="down" [ngClass]="{pushed: dPad?.down}"><div>▲</div></div>
+    </div>
+  </ng-template>
+  <ng-template ngSwitchCase="g27">
+    g27
+  </ng-template>
+  <ng-template ngSwitchDefault>
+    default
+  </ng-template>
+</ng-container>
+
+
+<ng-template #buttonTemplate let-data>
+  <div *ngIf="data.text !== ''">
+    <span>{{ data.text }}</span>
+    <span [style.background]="data.value ? 'green' : 'red' "></span>
+  </div>
+</ng-template>

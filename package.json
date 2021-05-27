@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve -o",
+    "build": "ng build --prod",
+    "b_url": "ng build --prod --base-href E:/Games/Twitch/WheelForOBS/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -20,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~11.2.6",
     "@angular/router": "~11.2.6",
     "rxjs": "~6.6.0",
+    "scss-mixin-leobonhart": "^1.1.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },

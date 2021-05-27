@@ -1,0 +1,110 @@
+@import '~scss-mixin-leobonhart/mixins.scss';
+
+:host{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+div{
+  display: flex;
+  height: 20px;
+  span{
+    font-size: 18px;
+    line-height: 20px;
+    &:nth-child(1) {
+      position: relative;
+      font-weight: 800;
+      margin-right: 10px;
+      &::after{
+        content: ':';
+        position: absolute;
+        right: -5px;
+      }
+    }
+    &:nth-child(2) {
+      width: 19px;
+      height: 19px;
+    }
+  }
+}
+.D-Pad{
+  $D-Pad-wh: 150px;
+  $D-Pad-button: 40px;
+  display: flex;
+  position: relative;
+  width: $D-Pad-wh;
+  height: $D-Pad-wh;
+  border-radius: 50%;
+  background-color: #aaa;
+  overflow: hidden;
+  user-select: none;
+  & > div{
+    position: absolute;
+    display: flex;
+    background-color: #ddd;
+    @include transition(background);
+    div{
+      width: $D-Pad-button;
+      height: $D-Pad-button;
+      font-size: $D-Pad-button;
+      line-height: $D-Pad-button;
+      color: #aaa;
+      @include transition(color);
+    }
+    &.pushed{
+      background-color: #0d3;
+      div{
+        color: #0a3;
+      }
+    }
+    &.up{
+      flex-direction: column;
+      top: 0;
+      width: $D-Pad-button;
+      height: $D-Pad-button * 2;
+      left: ($D-Pad-wh / 2) - ($D-Pad-button / 2);
+
+    }
+    &.down{
+      flex-direction: column;
+      bottom: 0;
+      width: $D-Pad-button;
+      height: $D-Pad-button * 2;
+      left: ($D-Pad-wh / 2) - ($D-Pad-button / 2);
+      justify-content: flex-end;
+      div{
+        transform: rotate(180deg);
+      }
+    }
+    &.right{
+      right: 0;
+      height: $D-Pad-button;
+      width: $D-Pad-button * 2;
+      bottom: ($D-Pad-wh / 2) - ($D-Pad-button / 2);
+      justify-content: flex-end;
+      div{
+        transform: rotate(90deg);
+      }
+    }
+    &.left{
+      left: 0;
+      height: $D-Pad-button;
+      width: $D-Pad-button * 2;
+      bottom: ($D-Pad-wh / 2) - ($D-Pad-button / 2);
+      div{
+        transform: rotate(-90deg);
+      }
+    }
+  }
+  &::after{
+    position: absolute;
+    content: '';
+    width: $D-Pad-button;
+    height: $D-Pad-button;
+    background-color: black;
+    left: ($D-Pad-wh / 2) - ($D-Pad-button / 2);
+    top: ($D-Pad-wh / 2) - ($D-Pad-button / 2);
+    background-color: #ddd;
+    z-index: 10;
+  }
+}

@@ -1,0 +1,5 @@
+<div class="image-wheel" [attr.data-type]="type">
+  <img [src]="loop.getImage('g29.png')" [alt]="type">
+  <div class="wheel-btns" [class]="item.key" *ngFor="let item of classWheel | keyvalue" [class.active]="item.value">
+  </div>
+</div>
