@@ -9,8 +9,8 @@
 3. Открыть в разархивированной папке index.html с помощью текстового редактора
 4. Указать локальный путь к сайту <img src="README/path.jpg" alt="image" width="800"/>
 5. Добавить локальный сайт в OBS
-<img src="README/RU/add1.jpg" alt="image" width="400"/>
-<img src="README/RU/add2.jpg" alt="image" width="800"/>
+<img src="README/RU/add1.png" alt="image" width="400"/>
+<img src="README/RU/add2.png" alt="image" width="800"/>
 
 Далее уже можно настроить окно руля в OBS
 
