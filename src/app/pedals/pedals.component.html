@@ -1,17 +1,23 @@
-<div class="pedals">
+<div class="pedals" [attr.data-style]="pedalsStyle" *ngIf="pedalsStyle === 'default'">
   <span data-pedal="clutch">
-    <span [style.height]="pedals.clutch">
-      <span></span>
-    </span>
+    <span [style.height]="pedals.clutch"></span>
   </span>
   <span data-pedal="brake">
-    <span [style.height]="pedals.brake">
-      <span></span>
-    </span>
+    <span [style.height]="pedals.brake"></span>
   </span>
   <span data-pedal="throttle">
-    <span [style.height]="pedals.throttle">
-      <span></span>
-    </span>
+    <span [style.height]="pedals.throttle"></span>
   </span>
 </div>
+<div class="pedals" [attr.data-style]="pedalsStyle" *ngIf="pedalsStyle === 'forza4'">
+  <svg data-pedal="clutch" viewBox="0 0 100 100">
+    <circle cx="50%" cy="50%" r="45" [attr.stroke-dashoffset]="pedals.clutchForza4"></circle>
+  </svg>
+  <svg data-pedal="brake" viewBox="0 0 100 100">
+    <circle cx="50%" cy="50%" r="45" [attr.stroke-dashoffset]="pedals.brakeForza4"></circle>
+  </svg>
+  <svg data-pedal="throttle" viewBox="0 0 100 100">
+    <circle cx="50%" cy="50%" r="45" [attr.stroke-dashoffset]="pedals.throttleForza4"></circle>
+  </svg>
+</div>
+

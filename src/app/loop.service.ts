@@ -58,7 +58,6 @@ export class LoopService {
   constructor(@Inject('WHEEL_TYPE') public typeWheel: string) {
     var timer = setInterval(() => {
       if (this.wheelDevice) {
-        console.log((this.wheelDevice.axes[this.axisIndexDPad]).toFixed(2));
         this.gameLoop();
         clearInterval(timer);
       }

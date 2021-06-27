@@ -1,35 +1,82 @@
 :host{
   display: flex;
+  position: relative;
 }
 
 .pedals{
   display: flex;
-  height:22vw;
+  height: 22vw;
+  width: 22vw;
   margin-top: auto;
 
-  [data-pedal]{
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    width:4vw;
-    height: 100%;
-    margin:0 1vw;
-    background-color:#AAA;
-    &  > span {
-      display:inline-block;
-      width: 100%;
+  &[data-style="default"] {
+    [data-pedal]{
+      display: flex;
+      flex-direction: column;
+      border: 1px solid black;
+      width:4vw;
       height: 100%;
+      margin:0 1vw;
       background-color:#AAA;
-      vertical-align:top;
-    }
-    &[data-pedal="clutch"] {
-      background-color:#FA0;
-    }
-    &[data-pedal="brake"] {
-      background-color:#C00;
-    }
-    &[data-pedal="throttle"] {
-      background-color:#0A0;
+      &  > span {
+        display:inline-block;
+        width: 100%;
+        height: 100%;
+        background-color:#AAA;
+        vertical-align:top;
+      }
+      &[data-pedal="clutch"] {
+        background-color:#FA0;
+      }
+      &[data-pedal="brake"] {
+        background-color:#C00;
+      }
+      &[data-pedal="throttle"] {
+        background-color:#0A0;
+      }
     }
   }
+
+  &[data-style="forza4"]{
+    position: relative;
+    svg{
+      width: 22vw;
+      height: 22vw;
+      position: absolute;
+      top: 75px;
+      left: -29px;
+      &[data-pedal="clutch"] {
+        transform: rotate(-59deg) scale(-1.09, 1.09);
+        circle{
+          stroke: #FA0;
+        }
+      }
+      &[data-pedal="brake"] {
+        transform: rotate(-59deg) scale(-1.045, 1.045);
+        circle{
+          stroke: #C00;
+        }
+      }
+      &[data-pedal="throttle"] {
+        transform: rotate(-59deg) scale(-1,1);
+        circle{
+          stroke: #0A0;
+        }
+      }
+      circle{
+        stroke-width: 2px;
+        fill: transparent;
+        stroke-dasharray: 282.743px;
+      }
+    }
+  }
+}
+
+img{
+  width: 22vw;
+  height: auto;
+  object-fit: contain;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
 }

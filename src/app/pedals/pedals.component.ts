@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { TPedalsStyle } from 'src/main';
 import { LoopService } from '../loop.service';
 import { Pedals } from './pedals.class';
 
@@ -11,7 +12,7 @@ export class PedalsComponent implements OnInit {
 
   pedals: Pedals = new Pedals();
 
-  constructor(private loop: LoopService) { }
+  constructor(private loop: LoopService, @Inject('PEDALS_STYLE') public pedalsStyle: TPedalsStyle) { }
 
   ngOnInit(): void {
     this.loop.deviceData.subscribe(x => {

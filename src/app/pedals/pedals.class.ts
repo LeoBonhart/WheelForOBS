@@ -7,6 +7,9 @@ interface IPedals {
   brake: number;
 }
 export class Pedals implements IPedals{
+
+  private readonly percentForza4 = (470 - 282.743) / 100;
+
   /** Газ */
   private _throttle: number = 0
   /** Газ */
@@ -15,7 +18,11 @@ export class Pedals implements IPedals{
   }
   /** Газ */
   public get throttle(): any {
-    return (100 - this._throttle * 100)+'%';
+    return this.getPercent(this._throttle)+'%';
+  };
+  /** Газ */
+  public get throttleForza4(): any {
+    return this.getPercentForza4(this._throttle)+'px';
   };
   /** Сцепление */
   private _clutch: number = 0
@@ -25,7 +32,11 @@ export class Pedals implements IPedals{
   }
   /** Сцепление */
   public get clutch(): any {
-    return (100 - this._clutch * 100)+'%';
+    return this.getPercent(this._clutch)+'%';
+  };
+  /** Сцепление */
+  public get clutchForza4(): any {
+    return this.getPercentForza4(this._clutch)+'px';
   };
   /** Тормоз */
   private _brake: number = 0
@@ -35,8 +46,20 @@ export class Pedals implements IPedals{
   }
   /** Тормоз */
   public get brake(): any {
-    return (100 - this._brake * 100)+'%';
+    return this.getPercent(this._brake)+'%';
   };
+  /** Тормоз */
+  public get brakeForza4(): any {
+    return this.getPercentForza4(this._brake)+'px';
+  };
+
+  private getPercent(v: number): number {
+    return (100 - v * 100);
+  }
+
+  private getPercentForza4(v: number): number {
+    return 282.743 + v * 100 * this.percentForza4;
+  }
 
   constructor(data?: IPedals) {
     if (data) {
